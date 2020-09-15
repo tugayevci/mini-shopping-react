@@ -5,7 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
-import Button from '@material-ui/core/Button'
+import AddToCartButton from './AddToCartButton'
 import Typography from '@material-ui/core/Typography'
 import Product from '../../types/Product'
 
@@ -43,9 +43,7 @@ const ProductCard = ({ product }: IProps) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size='small' color='primary'>
-          Add to Cart
-        </Button>
+        <AddToCartButton product={product} />
       </CardActions>
     </Card>
   )

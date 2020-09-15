@@ -136,7 +136,7 @@ const FilterArea = () => {
               </FormControl>
             </Grid>
           )
-        } else return <></>
+        } else return <React.Fragment key={i}></React.Fragment>
       })}
       <Grid item xs={12}>
         <Button onClick={() => filterDispatch(setFilters([]))} size='small' color='primary'>
