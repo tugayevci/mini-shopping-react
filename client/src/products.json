@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Basic Black Tshirt",
+    "price": 27.99,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2020/01/08/370203/34ff8b14-0eed-428d-9303-791a217568b9.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "black" },
+      { "key": "size", "name": "l" },
+      { "key": "gender", "name": "male" }
+    ]
+  }
+]

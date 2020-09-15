@@ -1,26 +1,24 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 import Header from './components/navbar/Header'
+import ListPage from './containers/ListPage'
 import FilterArea from './components/filter/FilterArea'
 import ProductList from './components/products/ProductList'
+import { Provider } from 'react-redux'
+import store from './redux/store/store'
 
 function App() {
   return (
-    <Grid container direction='column'>
-      <Grid item>
-        <Header />
-      </Grid>
-      <Grid item container>
-        <Grid item xs={false} sm={1} />
-        <Grid item xs={12} sm={2}>
-          <FilterArea />
+    <Provider store={store}>
+      <Grid container direction='column'>
+        <Grid item>
+          <Header />
         </Grid>
-        <Grid item xs={12} sm={8}>
-          <ProductList />
+        <Grid item container>
+          <ListPage />
         </Grid>
-        <Grid item xs={false} sm={1} />
       </Grid>
-    </Grid>
+    </Provider>
   )
 }
 

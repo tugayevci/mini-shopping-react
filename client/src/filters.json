@@ -1,0 +1,35 @@
+[
+  {
+    "key": "gender",
+    "name": "Gender",
+    "type": "single",
+    "values": [
+      { "key": "male", "name": "Male" },
+      { "key": "female", "name": "Female" }
+    ]
+  },
+  {
+    "key": "size",
+    "name": "Size",
+    "type": "multiple",
+    "values": [
+      { "key": "s", "name": "S" },
+      { "key": "m", "name": "M" },
+      { "key": "l", "name": "L" },
+      { "key": "xl", "name": "XL" }
+    ]
+  },
+  {
+    "key": "color",
+    "name": "Color",
+    "type": "multiple",
+    "values": [
+      { "key": "white", "name": "White" },
+      { "key": "black", "name": "Black" },
+      { "key": "red", "name": "Red" },
+      { "key": "green", "name": "Green" },
+      { "key": "gray", "name": "Gray" },
+      { "key": "orange", "name": "Orange" }
+    ]
+  }
+]
