@@ -7,6 +7,11 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Product from '../../types/Product'
+
+interface IProps {
+  product: Product
+}
 
 const useStyles = makeStyles({
   media: {
@@ -14,7 +19,7 @@ const useStyles = makeStyles({
   },
 })
 
-const ProductCard = () => {
+const ProductCard = ({ product }: IProps) => {
   const classes = useStyles()
 
   return (
@@ -23,15 +28,17 @@ const ProductCard = () => {
         <CardMedia
           className={classes.media}
           image='https://mudo.akinoncdn.com/products/2020/01/08/370203/34ff8b14-0eed-428d-9303-791a217568b9.jpg'
-          title='Contemplative Reptile'
+          title={product.name}
         />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
-            Basic Tshirt
+            {product.name}
+          </Typography>
+          <Typography gutterBottom variant='h6' component='h6'>
+            {`${product.price} ₺`}
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
-            Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear or
-            school outfit
+            {product.details}
           </Typography>
         </CardContent>
       </CardActionArea>
