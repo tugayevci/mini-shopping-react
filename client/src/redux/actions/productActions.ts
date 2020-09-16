@@ -1,5 +1,6 @@
 import Product from '../../types/Product'
 import products from '../../products.json'
+import { sleep } from '../../utils/helpers'
 
 export interface IGetProductsAction {
   readonly type: 'GET_PRODUCTS'
@@ -7,7 +8,9 @@ export interface IGetProductsAction {
 }
 export type ProductActions = IGetProductsAction
 
-export const getProducts = (filters: any[]): IGetProductsAction => {
+export const getProducts = async (filters: any[]): Promise<IGetProductsAction> => {
+  await sleep(500)
+
   let temp = products
   let filteredProducts: Product[] = []
 

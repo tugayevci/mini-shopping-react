@@ -1,11 +1,11 @@
-import Product from '../../types/Product'
+import Cart from '../../types/Cart'
 import { CartActions } from '../actions/cartActions'
 
 type IState = {
-  cart: Product[]
+  cart: Cart
 }
 const initialState: IState = {
-  cart: [],
+  cart: new Cart({ cartItems: [] }),
 }
 const CartReducer = (state: IState = initialState, action: CartActions) => {
   switch (action.type) {

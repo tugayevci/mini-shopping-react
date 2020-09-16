@@ -1,4 +1,5 @@
 import filters from '../../filters.json'
+import { sleep } from '../../utils/helpers'
 
 export interface IGetFiltersAction {
   readonly type: 'GET_FILTERS'
@@ -19,7 +20,8 @@ export const getFilters = (): IGetFiltersAction => {
   }
 }
 
-export const setFilters = (filters: any[]): ISetFiltersAction => {
+export const setFilters = async (filters: any[]): Promise<ISetFiltersAction> => {
+  await sleep(500)
   return {
     type: 'SET_FILTERS',
     payload: filters,

@@ -1,13 +1,14 @@
-import Product from '../../types/Product'
+import Cart from '../../types/Cart'
+import { sleep } from '../../utils/helpers'
 
 export interface IGetCartAction {
   readonly type: 'GET_CART'
-  payload: Product[]
+  payload: Cart
 }
 
 export interface ISetCartAction {
   readonly type: 'SET_CART'
-  payload: any[]
+  payload: Cart
 }
 
 export type CartActions = IGetCartAction | ISetCartAction
@@ -15,13 +16,14 @@ export type CartActions = IGetCartAction | ISetCartAction
 export const getCart = (): IGetCartAction => {
   return {
     type: 'GET_CART',
-    payload: [],
+    payload: new Cart({ cartItems: [] }),
   }
 }
 
-export const setCart = (filters: any[]): ISetCartAction => {
+export const setCart = async (cart: Cart): Promise<ISetCartAction> => {
+  await sleep(500)
   return {
     type: 'SET_CART',
-    payload: filters,
+    payload: cart,
   }
 }

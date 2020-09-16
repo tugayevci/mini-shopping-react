@@ -15,7 +15,9 @@ interface IProps {
 
 const useStyles = makeStyles({
   media: {
-    height: 300,
+    width: 200,
+    height: 200,
+    marginLeft: '15%',
   },
 })
 
@@ -25,17 +27,16 @@ const ProductCard = ({ product }: IProps) => {
   return (
     <Card>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image='https://mudo.akinoncdn.com/products/2020/01/08/370203/34ff8b14-0eed-428d-9303-791a217568b9.jpg'
-          title={product.name}
-        />
+        <CardMedia className={classes.media} image={product.imageUrl} title={product.name} />
         <CardContent>
           <Typography gutterBottom variant='h5' component='h2'>
             {product.name}
           </Typography>
           <Typography gutterBottom variant='h6' component='h6'>
             {`${product.price} ₺`}
+          </Typography>
+          <Typography gutterBottom variant='body1' component='p'>
+            {product.filters?.map((filter) => `${filter.render}        `)}
           </Typography>
           <Typography variant='body2' color='textSecondary' component='p'>
             {product.details}

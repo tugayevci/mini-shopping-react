@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import React from 'react'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { makeStyles } from '@material-ui/styles'
+import CartArea from './CartArea'
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
@@ -16,7 +16,7 @@ const Header = () => {
     <AppBar position='static'>
       <Toolbar>
         <Typography className={classes.typographyStyles}>Shopping App</Typography>
-        <ShoppingCartIcon />
+        <CartArea />
       </Toolbar>
     </AppBar>
   )

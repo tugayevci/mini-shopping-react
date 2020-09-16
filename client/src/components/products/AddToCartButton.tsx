@@ -4,8 +4,10 @@ import Button from '@material-ui/core/Button'
 import Product from '../../types/Product'
 
 import { getCart, setCart, CartActions } from '../../redux/actions/cartActions'
+import { getBackdropStatus, setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
 import { AppState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
+import Cart from '../../types/Cart'
 
 interface IProps {
   product: Product
@@ -14,20 +16,26 @@ interface IProps {
 const AddToCartButton = ({ product }: IProps) => {
   const cart = useSelector((state: AppState) => state.cart.cart)
   const cartDispatch = useDispatch<Dispatch<CartActions>>()
+  const backdropDispatch = useDispatch<Dispatch<BackdropStatusActions>>()
 
-  const addToCartHandler = (product: Product) => {
-    const isExist = cart.find((cartItem) => cartItem === product)
-    console.log('is', isExist)
+  const addToCartHandler = async (product: Product) => {
+    backdropDispatch(setBackdropStatus(true))
+    const isExist = cart.cartItems.find((cartItem) => cartItem.product === product)
 
     if (isExist) {
+      const index = cart.cartItems.findIndex((cartItem) => cartItem.product === product)
+      let tempCartItems = cart.cartItems
+      tempCartItems[index] = { product, count: tempCartItems[index].count + 1 }
+
+      cartDispatch(await setCart({ ...cart, cartItems: [...tempCartItems] }))
     } else {
-      cartDispatch(setCart([...cart, product]))
+      cartDispatch(await setCart({ ...cart, cartItems: [...cart.cartItems, { product, count: 1 }] }))
     }
+    backdropDispatch(setBackdropStatus(false))
   }
-  console.log('cart', cart)
 
   return (
-    <Button size='small' color='primary' onClick={() => addToCartHandler(product)}>
+    <Button variant='contained' color='primary' onClick={() => addToCartHandler(product)}>
       Add to Cart
     </Button>
   )

@@ -15,8 +15,12 @@ const ListPage = () => {
   const productDispatch = useDispatch<Dispatch<ProductActions>>()
 
   useEffect(() => {
-    productDispatch(getProducts(selectedFilters))
+    getData()
   }, [productDispatch, selectedFilters])
+
+  const getData = async () => {
+    productDispatch(await getProducts(selectedFilters))
+  }
 
   return (
     <>

@@ -1,14 +1,38 @@
 [
   {
     "id": 1,
-    "name": "Basic Black Tshirt",
+    "name": "Basic XXX Tshirt",
     "price": 27.99,
     "imageUrl": "https://mudo.akinoncdn.com/products/2020/01/08/370203/34ff8b14-0eed-428d-9303-791a217568b9.jpg",
     "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
     "filters": [
-      { "key": "color", "name": "black" },
-      { "key": "size", "name": "l" },
-      { "key": "gender", "name": "male" }
+      { "key": "color", "name": "black", "render": "Black" },
+      { "key": "size", "name": "l", "render": "L" },
+      { "key": "gender", "name": "male", "render": "Male" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Basic YYY Tshirt",
+    "price": 21.99,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2020/01/03/372609/fd389dfd-71dc-43c4-ae6e-782e09d1dd18.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "red", "render": "Red" },
+      { "key": "size", "name": "s", "render": "S" },
+      { "key": "gender", "name": "female", "render": "Female" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Basic ZZZ Tshirt",
+    "price": 17.5,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2020/01/07/371461/ecda45c8-47dc-4b30-88b5-37d01bf2333e.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "green", "render": "Green" },
+      { "key": "size", "name": "xl", "render": "Xl" },
+      { "key": "gender", "name": "male", "render": "Male" }
     ]
   }
 ]

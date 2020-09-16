@@ -7,6 +7,7 @@ import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import { getFilters, setFilters, FilterActions } from '../../redux/actions/filterActions'
+import { getBackdropStatus, setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
 import { AppState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button/Button'
@@ -28,8 +29,11 @@ const FilterArea = () => {
   console.log('selectedFilters', selectedFilters)
 
   const filterDispatch = useDispatch<Dispatch<FilterActions>>()
+  const backdropDispatch = useDispatch<Dispatch<BackdropStatusActions>>()
 
-  const singleFilterHandler = (key: any, name: any) => {
+  const singleFilterHandler = async (key: any, name: any) => {
+    backdropDispatch(setBackdropStatus(true))
+
     const tempFilter = { key, values: [name] }
 
     let temp = selectedFilters.find((x) => x.key === key)
@@ -37,13 +41,16 @@ const FilterArea = () => {
       let tempFilters = selectedFilters
       let index = tempFilters.findIndex((x) => x.key === key)
       tempFilters[index] = tempFilter
-      filterDispatch(setFilters([...tempFilters]))
+      filterDispatch(await setFilters([...tempFilters]))
     } else {
-      filterDispatch(setFilters([...selectedFilters, tempFilter]))
+      filterDispatch(await setFilters([...selectedFilters, tempFilter]))
     }
+    backdropDispatch(setBackdropStatus(false))
   }
 
-  const multipleFilterHandler = (key: any, name: any) => {
+  const multipleFilterHandler = async (key: any, name: any) => {
+    backdropDispatch(setBackdropStatus(true))
+
     let tempFilter = { key, values: [name] }
 
     let tempFilters = selectedFilters
@@ -56,9 +63,9 @@ const FilterArea = () => {
         console.log('tempFilters[keyIndex].name', tempFilters[keyIndex])
         tempFilter = { key, values: [...tempFilters[keyIndex].values, name] }
         tempFilters[keyIndex] = tempFilter
-        filterDispatch(setFilters([...tempFilters]))
+        filterDispatch(await setFilters([...tempFilters]))
       } else {
-        filterDispatch(setFilters([...tempFilters, tempFilter]))
+        filterDispatch(await setFilters([...tempFilters, tempFilter]))
       }
     } else {
       if (keyIndex >= 0) {
@@ -66,15 +73,16 @@ const FilterArea = () => {
         tempFilters.splice(filterIndex, 1)
 
         if (tempFilter.values.length === 0) {
-          filterDispatch(setFilters([...tempFilters]))
+          filterDispatch(await setFilters([...tempFilters]))
         } else {
-          filterDispatch(setFilters([...tempFilters, tempFilter]))
+          filterDispatch(await setFilters([...tempFilters, tempFilter]))
         }
       } else {
         tempFilters.splice(filterIndex, 1)
-        filterDispatch(setFilters([...tempFilters]))
+        filterDispatch(await setFilters([...tempFilters]))
       }
     }
+    backdropDispatch(setBackdropStatus(false))
   }
 
   useEffect(() => {
@@ -93,6 +101,7 @@ const FilterArea = () => {
               <FormControl component='fieldset'>
                 <FormLabel component='legend'>{mainFilter.name}</FormLabel>
                 <RadioGroup
+                  row
                   aria-label={mainFilter.name}
                   name={mainFilter.name}
                   value={
@@ -114,7 +123,7 @@ const FilterArea = () => {
             <Grid key={i} item xs={12}>
               <FormControl component='fieldset'>
                 <FormLabel component='legend'>{mainFilter.name}</FormLabel>
-                <FormGroup>
+                <FormGroup row>
                   {mainFilter.values.map((filterValue: any, j: number) => (
                     <FormControlLabel
                       key={j}
@@ -139,7 +148,7 @@ const FilterArea = () => {
         } else return <React.Fragment key={i}></React.Fragment>
       })}
       <Grid item xs={12}>
-        <Button onClick={() => filterDispatch(setFilters([]))} size='small' color='primary'>
+        <Button onClick={async () => filterDispatch(await setFilters([]))} variant='contained' color='primary'>
           Clear Filter
         </Button>
       </Grid>

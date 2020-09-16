@@ -4,7 +4,7 @@ export default class Product {
   price: number
   imageUrl?: string
   details?: string
-  filters?: any
+  filters?: any[]
 
   constructor(x: Product) {
     this.id = x.id
