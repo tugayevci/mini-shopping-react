@@ -1,13 +1,11 @@
 import React, { Dispatch } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Product from '../../types/Product'
 
-import { getCart, setCart, CartActions } from '../../redux/actions/cartActions'
-import { getBackdropStatus, setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
+import { setCart, CartActions } from '../../redux/actions/cartActions'
+import { setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
 import { AppState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import Cart from '../../types/Cart'
 
 interface IProps {
   product: Product
@@ -19,19 +17,19 @@ const AddToCartButton = ({ product }: IProps) => {
   const backdropDispatch = useDispatch<Dispatch<BackdropStatusActions>>()
 
   const addToCartHandler = async (product: Product) => {
-    backdropDispatch(setBackdropStatus(true))
-    const isExist = cart.cartItems.find((cartItem) => cartItem.product === product)
+    backdropDispatch(setBackdropStatus(true)) //Backdrop true
+    const isExist = cart.cartItems.find((cartItem) => cartItem.product === product) //Daha önce sepette var mı?
 
     if (isExist) {
       const index = cart.cartItems.findIndex((cartItem) => cartItem.product === product)
       let tempCartItems = cart.cartItems
-      tempCartItems[index] = { product, count: tempCartItems[index].count + 1 }
+      tempCartItems[index] = { product, count: tempCartItems[index].count + 1 } //Varsa count 1 arttır
 
       cartDispatch(await setCart({ ...cart, cartItems: [...tempCartItems] }))
     } else {
       cartDispatch(await setCart({ ...cart, cartItems: [...cart.cartItems, { product, count: 1 }] }))
     }
-    backdropDispatch(setBackdropStatus(false))
+    backdropDispatch(setBackdropStatus(false)) //Backdrop false
   }
 
   return (

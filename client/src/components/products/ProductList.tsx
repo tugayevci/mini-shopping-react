@@ -8,10 +8,6 @@ interface IProps {
   products: Product[]
 }
 
-interface StateProps {
-  products: Product[]
-}
-
 const useStyles = makeStyles(() => ({
   typographyStyles: {
     flex: 1,

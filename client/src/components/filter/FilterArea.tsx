@@ -7,7 +7,7 @@ import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import { getFilters, setFilters, FilterActions } from '../../redux/actions/filterActions'
-import { getBackdropStatus, setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
+import { setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
 import { AppState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button/Button'
@@ -26,52 +26,64 @@ const useStyles = makeStyles(() => ({
 const FilterArea = () => {
   const filters = useSelector((state: AppState) => state.filter.filters)
   const selectedFilters = useSelector((state: AppState) => state.filter.selectedFilters)
-  console.log('selectedFilters', selectedFilters)
 
   const filterDispatch = useDispatch<Dispatch<FilterActions>>()
   const backdropDispatch = useDispatch<Dispatch<BackdropStatusActions>>()
 
+  //Tek seçim yapılabilen filtre için kullanılır
   const singleFilterHandler = async (key: any, name: any) => {
-    backdropDispatch(setBackdropStatus(true))
+    backdropDispatch(setBackdropStatus(true)) //backdrop true
 
-    const tempFilter = { key, values: [name] }
+    const tempFilter = { key, values: [name] } //geçici filtre
 
-    let temp = selectedFilters.find((x) => x.key === key)
-    if (temp) {
+    let isExist = selectedFilters.find((x) => x.key === key) //Filtre daha önce eklendi mi?
+    if (isExist) {
+      //Filtre daha önce eklendiyse, o filtreyi bul ve geçici filtre ile değiştir.
       let tempFilters = selectedFilters
       let index = tempFilters.findIndex((x) => x.key === key)
       tempFilters[index] = tempFilter
       filterDispatch(await setFilters([...tempFilters]))
     } else {
+      //Filtre daha önce eklenmediyse, geçici filtreyi ekle.
       filterDispatch(await setFilters([...selectedFilters, tempFilter]))
     }
-    backdropDispatch(setBackdropStatus(false))
+    backdropDispatch(setBackdropStatus(false)) //backdrop false
   }
 
-  const multipleFilterHandler = async (key: any, name: any) => {
-    backdropDispatch(setBackdropStatus(true))
+  //Birden fazla seçim yapılabilen filtre için kullanılır
+  //Eğer daha önce aynı key ve name değerleri birebir aynı filtre eklendiyse bu filtreyi çıkarır.
 
-    let tempFilter = { key, values: [name] }
+  const multipleFilterHandler = async (key: any, name: any) => {
+    backdropDispatch(setBackdropStatus(true)) //backdrop true
+
+    let tempFilter = { key, values: [name] } //geçici filtre
 
     let tempFilters = selectedFilters
-    let filterIndex = selectedFilters.findIndex((x) => x.key === key && x.values.includes(name))
-    const keyIndex = selectedFilters.findIndex((x) => x.key === key)
+    const filterIndex = selectedFilters.findIndex((x) => x.key === key && x.values.includes(name)) //Bu filtre (key ve name) daha önce eklendi mi?
+    const keyIndex = selectedFilters.findIndex((x) => x.key === key) //Bu filtre (key) daha önce eklendi mi?
 
+    //Eğer bu filtre (key ve name) yoksa;
     if (filterIndex < 0) {
+      //Eğer bu filtre (key) varsa;
       if (keyIndex >= 0) {
-        console.log('keyIndex', keyIndex)
-        console.log('tempFilters[keyIndex].name', tempFilters[keyIndex])
         tempFilter = { key, values: [...tempFilters[keyIndex].values, name] }
         tempFilters[keyIndex] = tempFilter
         filterDispatch(await setFilters([...tempFilters]))
       } else {
+        //Eğer bu filtre (key) yoksa;
         filterDispatch(await setFilters([...tempFilters, tempFilter]))
       }
     } else {
+      //Eğer bu filtre (key ve name) daha önce eklendiyse;
+
       if (keyIndex >= 0) {
+        //Eğer bu filtre (key) daha önce eklendiyse
+
+        //Seçilmiş filtrelerden geçici filtreyi çıkarır.
         tempFilter = { key, values: [...tempFilters[keyIndex].values].filter((x) => x !== name) }
         tempFilters.splice(filterIndex, 1)
 
+        //Eğer ki filtrenin values değeri boş ise seçilmiş filtrelerden bu filtreyi(key) tamamen çıkarır.
         if (tempFilter.values.length === 0) {
           filterDispatch(await setFilters([...tempFilters]))
         } else {
@@ -82,14 +94,13 @@ const FilterArea = () => {
         filterDispatch(await setFilters([...tempFilters]))
       }
     }
-    backdropDispatch(setBackdropStatus(false))
+    backdropDispatch(setBackdropStatus(false)) //backdrop false
   }
 
   useEffect(() => {
     filterDispatch(getFilters())
   }, [filterDispatch])
 
-  console.log('filters', filters)
   const classes = useStyles()
 
   return (

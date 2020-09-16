@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Grid } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import Header from './components/navbar/Header'
 import ListPage from './containers/ListPage'
 import Backdrop from './components/backdrop/Backdrop'

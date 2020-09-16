@@ -34,5 +34,77 @@
       { "key": "size", "name": "xl", "render": "Xl" },
       { "key": "gender", "name": "male", "render": "Male" }
     ]
+  },
+  {
+    "id": 4,
+    "name": "Basic DDD Tshirt",
+    "price": 100,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2020/01/08/370203/34ff8b14-0eed-428d-9303-791a217568b9.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "black", "render": "Black" },
+      { "key": "size", "name": "l", "render": "L" },
+      { "key": "gender", "name": "male", "render": "Male" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Basic AAA Tshirt",
+    "price": 65.43,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2020/02/28/368719/fd7e1777-69d9-4bc2-bab2-919c52209ba5_size700x700_quality90.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "blue", "render": "Blue" },
+      { "key": "size", "name": "l", "render": "L" },
+      { "key": "gender", "name": "female", "render": "Female" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Basic FFF Tshirt",
+    "price": 45.44,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2018/02/20/284052/d7f47c18-7a4d-45e0-b9a0-119e3b166722.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "blue", "render": "Blue" },
+      { "key": "size", "name": "m", "render": "M" },
+      { "key": "gender", "name": "male", "render": "Male" }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Basic 222 Tshirt",
+    "price": 64.11,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2020/01/08/370203/34ff8b14-0eed-428d-9303-791a217568b9.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "black", "render": "Black" },
+      { "key": "size", "name": "l", "render": "L" },
+      { "key": "gender", "name": "male", "render": "Male" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Basic NNN Tshirt",
+    "price": 53.89,
+    "imageUrl": "https://mudo.akinoncdn.com/products/2020/01/03/372609/fd389dfd-71dc-43c4-ae6e-782e09d1dd18.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "red", "render": "Red" },
+      { "key": "size", "name": "s", "render": "S" },
+      { "key": "gender", "name": "female", "render": "Female" }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Basic KKK Tshirt",
+    "price": 12.55,
+    "imageUrl": "https://cdn.dsmcdn.com/assets/product/media/images/20200225/19/3768193/64173909/1/1_org.jpg",
+    "details": "Lightweight fabric with some stretch,Super comfy, breathable and lightweight fabric, lounge wear, great for gym workout, streetwear orschool outfit",
+    "filters": [
+      { "key": "color", "name": "orange", "render": "Orange" },
+      { "key": "size", "name": "s", "render": "S" },
+      { "key": "gender", "name": "male", "render": "Male" }
+    ]
   }
 ]

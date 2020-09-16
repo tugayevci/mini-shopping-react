@@ -7,8 +7,6 @@ const initialState: IState = {
   open: false,
 }
 const BackdropReducer = (state: IState = initialState, action: BackdropStatusActions) => {
-  console.log('bana gelen action', action)
-
   switch (action.type) {
     case 'GET_BACKDROP_STATUS':
       return {

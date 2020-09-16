@@ -10,8 +10,6 @@ const ListPage = () => {
   const products = useSelector((state: AppState) => state.product.products)
   const selectedFilters = useSelector((state: AppState) => state.filter.selectedFilters)
 
-  console.log('products', products)
-
   const productDispatch = useDispatch<Dispatch<ProductActions>>()
 
   useEffect(() => {
