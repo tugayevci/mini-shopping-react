@@ -31,5 +31,16 @@
       { "key": "gray", "name": "Gray" },
       { "key": "orange", "name": "Orange" }
     ]
+  },
+  {
+    "key": "price",
+    "name": "Price",
+    "type": "multiple",
+    "values": [
+      { "key": "0-10", "name": "0-10" },
+      { "key": "10-25", "name": "10-25" },
+      { "key": "25-50", "name": "25-50" },
+      { "key": "50-100", "name": "50-100" }
+    ]
   }
 ]
