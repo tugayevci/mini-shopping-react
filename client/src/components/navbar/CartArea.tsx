@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Dispatch, useState } from 'react'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { makeStyles } from '@material-ui/styles'
 import { Card, CardContent, CardMedia, IconButton, Typography } from '@material-ui/core'
@@ -6,7 +6,12 @@ import Badge from '@material-ui/core/Badge'
 import Paper from '@material-ui/core/Paper'
 
 import { AppState } from '../../redux/reducers/rootReducer'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import DeleteIcon from '@material-ui/icons/Delete'
+import CartItem from '../../types/CartItem'
+import { CartActions, setCart } from '../../redux/actions/cartActions'
+
+import { setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
 
 const useStyles = makeStyles(() => ({
   typographyStyles: {
@@ -39,12 +44,27 @@ const useStyles = makeStyles(() => ({
   cartEmptyText: {
     margin: '12%',
   },
+  deleteIcon: {
+    marginTop: 50,
+    marginRight: 10,
+  },
 }))
 
 const CartArea = () => {
   const classes = useStyles()
   const cart = useSelector((state: AppState) => state.cart.cart)
   const [showCart, setShowCart] = useState(false)
+  const cartDispatch = useDispatch<Dispatch<CartActions>>()
+  const backdropDispatch = useDispatch<Dispatch<BackdropStatusActions>>()
+
+  const deleteFromCart = async (id: number) => {
+    backdropDispatch(setBackdropStatus(true)) //Backdrop true
+
+    let temp = cart.cartItems
+    temp = temp.filter((x) => x.id !== id)
+    cartDispatch(await setCart({ cartItems: temp }))
+    backdropDispatch(setBackdropStatus(false)) //Backdrop false
+  }
 
   return (
     <>
@@ -61,7 +81,7 @@ const CartArea = () => {
             </Typography>
           )}
 
-          {cart.cartItems.map((cartItem, i) => {
+          {cart.cartItems.map((cartItem: CartItem, i: number) => {
             const cartItemPrice = cartItem.product.price * cartItem.count
 
             return (
@@ -80,6 +100,11 @@ const CartArea = () => {
                     </Typography>
                   </CardContent>
                 </div>
+                <div>
+                  <IconButton aria-label='delete-cart-item' onClick={() => deleteFromCart(cartItem.id)}>
+                    <DeleteIcon className={classes.deleteIcon} />
+                  </IconButton>
+                </div>
               </Card>
             )
           })}
@@ -89,8 +114,8 @@ const CartArea = () => {
               <Typography component='h5' variant='h5'>
                 Total:{' '}
                 {cart.cartItems
-                  .map((cartItem) => cartItem.product.price * cartItem.count)
-                  .reduce((a, r) => a + r)
+                  .map((cartItem: CartItem) => cartItem.product.price * cartItem.count)
+                  .reduce((a: number, r: number) => a + r)
                   .toFixed(2)}{' '}
                 ₺
               </Typography>
