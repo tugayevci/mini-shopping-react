@@ -2,7 +2,7 @@ import React, { Dispatch } from 'react'
 import Button from '@material-ui/core/Button'
 import Product from '../../types/Product'
 
-import { setCart, CartActions } from '../../redux/actions/cartActions'
+import { setCart, addToCart, CartActions } from '../../redux/actions/cartActions'
 import { setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
 import { AppState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,6 +13,7 @@ interface IProps {
 }
 
 const AddToCartButton = ({ product }: IProps) => {
+  //@ts-ignore
   const cart = useSelector((state: AppState) => state.cart.cart)
   const cartDispatch = useDispatch<Dispatch<CartActions>>()
   const backdropDispatch = useDispatch<Dispatch<BackdropStatusActions>>()
@@ -28,7 +29,7 @@ const AddToCartButton = ({ product }: IProps) => {
 
       cartDispatch(await setCart({ ...cart, cartItems: [...tempCartItems] }))
     } else {
-      cartDispatch(await setCart({ ...cart, cartItems: [...cart.cartItems, { product, count: 1, id: Math.random() }] }))
+      cartDispatch(await addToCart({ product, count: 1, id: Math.random() }))
     }
     backdropDispatch(setBackdropStatus(false)) //Backdrop false
   }

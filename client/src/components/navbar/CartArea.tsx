@@ -9,7 +9,7 @@ import { AppState } from '../../redux/reducers/rootReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import DeleteIcon from '@material-ui/icons/Delete'
 import CartItem from '../../types/CartItem'
-import { CartActions, setCart } from '../../redux/actions/cartActions'
+import { CartActions, removeFromCart, setCart } from '../../redux/actions/cartActions'
 
 import { setBackdropStatus, BackdropStatusActions } from '../../redux/actions/backdropActions'
 
@@ -52,17 +52,14 @@ const useStyles = makeStyles(() => ({
 
 const CartArea = () => {
   const classes = useStyles()
-  const cart = useSelector((state: AppState) => state.cart.cart)
+  const cart = useSelector((state: AppState) => state.cart!.cart)
   const [showCart, setShowCart] = useState(false)
   const cartDispatch = useDispatch<Dispatch<CartActions>>()
   const backdropDispatch = useDispatch<Dispatch<BackdropStatusActions>>()
 
   const deleteFromCart = async (id: number) => {
     backdropDispatch(setBackdropStatus(true)) //Backdrop true
-
-    let temp = cart.cartItems
-    temp = temp.filter((x) => x.id !== id)
-    cartDispatch(await setCart({ cartItems: temp }))
+    cartDispatch(await removeFromCart(id))
     backdropDispatch(setBackdropStatus(false)) //Backdrop false
   }
 
